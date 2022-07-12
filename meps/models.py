@@ -13,7 +13,9 @@ class Post(models.Model):
     body = models.TextField(blank=True)
     created = models.DateTimeField(auto_now_add=True, blank=True)
     updated = models.DateTimeField(auto_now_add=True, blank=True)
-    publish = models.DateTimeField(default=timezone.now())
+    publish = models.DateTimeField(default=timezone.now(), blank=True)
     author = models.ForeignKey(User, on_delete=models.CASCADE, related_name='posted', null=True, default="")
     status = models.CharField(choices=STATUS_CHOICE, default='draft', max_length=10)
-    publish = models.DateTimeField(timezone.now())
+
+    def __str__(self):
+        return self.title
